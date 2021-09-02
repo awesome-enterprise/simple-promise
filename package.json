@@ -1,0 +1,33 @@
+{
+  "name": "simple-promise",
+  "version": "1.0.0",
+  "description": "In this repo I'll try to implement simple promise.",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start-example-native": "node build/example-native.js",
+    "start-example-custom": "node build/example-custom.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enterprise-diesel/simple-promise.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enterprise-diesel/simple-promise/issues"
+  },
+  "homepage": "https://github.com/enterprise-diesel/simple-promise#readme",
+  "dependencies": {
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.10"
+  }
+}

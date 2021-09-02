@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "declaration": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2020",
+    "declarationDir": "./typings",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "declarationMap": true,
+    "inlineSourceMap": true,
+    "lib": [
+      "es2020"
+    ],
+    "types": [
+      "node",
+    ],
+    "outDir": "./build"
+  },
+  "paths": {
+    "*": [
+      "types/*"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "coverage",
+    "**/*.spec.ts"
+  ]
+}
