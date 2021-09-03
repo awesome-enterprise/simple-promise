@@ -8,11 +8,6 @@ enum PromiseStates {
     Rejected = "rejected"
 }
 
-type NextPromiseChain = {
-
-    nextThen: NextPromiseChain | null;
-}
-
 export class MyPromise {
     private state: PromiseStates;
     private callbackFn: ExecuteFunction;
@@ -45,34 +40,48 @@ export class MyPromise {
         }
     }
 
-    private resolve(data) {
+    protected resolve(data) {
+        if (this.state !== PromiseStates.Pending) {
+            return;
+        }
         this.value = data;
         if (this.next && this.next.nextResolveCallback) {
-            setImmediate(() => {
-                let nextResult;
-                try {
-                    nextResult = this.next.nextResolveCallback.bind(this.next)(this.value);
-                    this.next.resolve.bind(this.next)(nextResult);
-                } catch (e) {
-                    this.next.reject.bind(this.next)(e);
-                }
-
-            })
+            let nextResult;
+            try {
+                nextResult = this.next.nextResolveCallback.bind(this.next)(this.value);
+                this.next.resolve.bind(this.next)(nextResult);
+            } catch (e) {
+                this.next.reject.bind(this.next)(e);
+            }
+            // setImmediate(() => {
+            //     let nextResult;
+            //     try {
+            //         nextResult = this.next.nextResolveCallback.bind(this.next)(this.value);
+            //         this.next.resolve.bind(this.next)(nextResult);
+            //     } catch (e) {
+            //         this.next.reject.bind(this.next)(e);
+            //     }
+            // })
         }
         this.state = PromiseStates.Fulfilled;
     }
 
-    private reject(reason) {
+    protected reject(reason) {
+        if (this.state !== PromiseStates.Pending) {
+            return;
+        }
         this.value = reason;
         let next = this.next;
         while (next && !next.nextRejectCallback) {
             next = next.next;
         }
         if (next) {
-            setImmediate(() => {
-                const result = next.nextRejectCallback.bind(next)(reason);
-                next.resolve.bind(next)(result);
-            })
+            const result = next.nextRejectCallback.bind(next)(reason);
+            next.resolve.bind(next)(result);
+            // setImmediate(() => {
+            //     const result = next.nextRejectCallback.bind(next)(reason);
+            //     next.resolve.bind(next)(result);
+            // })
         }
         this.state = PromiseStates.Rejected;
     }

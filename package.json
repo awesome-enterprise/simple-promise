@@ -7,7 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "promises-aplus-tests build/lib/other/other-adapter.js",
     "build": "tsc",
     "start-example-native": "node build/example-native.js",
     "start-example-custom": "node build/example-custom.js"
@@ -28,6 +28,7 @@
     "typescript": "^4.4.2"
   },
   "devDependencies": {
-    "@types/node": "^16.7.10"
+    "@types/node": "^16.7.10",
+    "promises-aplus-tests": "^2.1.2"
   }
 }
